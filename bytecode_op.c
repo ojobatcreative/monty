@@ -1,50 +1,48 @@
 #include "monty.h"
-
 /**
- * ex_op - Executes the given op.
- * @stack: Double pointer to the head of the stack.
- * @op: Opcode to be executed.
- * @value: Integer value (if any) associated with the opcode.
- * @line_number: Line number of the Monty bytecode file.
- */
-
-void ex_op(stack_t **stack, char *op, int value, unsigned int line_number)
+* execute - executes the opcode
+* @stack: head linked list - stack
+* @counter: line_counter
+* @file: poiner to monty file
+* @content: line content
+* Return: no return
+*/
+int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 {
-	typedef struct
+	instruction_t opst[] = {
+				{"push", push_it}, {"pall", pall_it}, {"pint", pint_it},
+				{"pop", custom_pop},
+				{"swap", swap_it},
+				{"add", add_it},
+				{"nop", nop_do},
+				{"sub", custom_sub},
+				{"div", custom_div},
+				{"mul", custom_mul},
+				{"mod", mod_it},
+				{"rotl", rotl_it},
+				{"queue", queue_it},
+				{NULL, NULL}
+				};
+	unsigned int i = 0;
+	char *op;
+
+	op = strtok(content, " \n\t");
+	if (op && op[0] == '#')
+		return (0);
+	bus.arg = strtok(NULL, " \n\t");
+	while (opst[i].opcode && op)
 	{
-		const char *name;
-		void (*function)(stack_t **, unsigned int);
-	}
-
-	OpMapping;
-
-	OpMapping operations[] =
-	{
-		{"push", push_it},
-		{"pall", pall_it},
-		{"pint", pint_it},
-		{"pop", pop_it},
-		{"swap", swap_it},
-		{"add", add_it},
-		{"nop", nop_do},
-		{"mul", mul_it},
-		{"mod", mod_it},
-		{"rotl", rotl_it},
-		{"queue", queue_it},
-	};
-
-	size_t num_ops sizeof(operations) / sizeof(operations[0]);
-
-	for (size_t i = 0; i < num_ops; ++i)
-	{
-		if (strcmp(op, ops[i].name) == 0)
-		{
-			ops[i].function(stack, line_number);
-			return;
+		if (strcmp(op, opst[i].opcode) == 0)
+		{	opst[i].f(stack, counter);
+			return (0);
 		}
+		i++;
 	}
-
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, op);
-    exit(EXIT_FAILURE);
+	if (op && opst[i].opcode == NULL)
+	{ fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
+		fclose(file);
+		free(content);
+		free_stack(*stack);
+		exit(EXIT_FAILURE); }
+	return (1);
 }
-

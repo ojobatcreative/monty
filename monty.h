@@ -42,7 +42,6 @@ void pop_it(stack_t **stack, unsigned int line_number);
 void swap_it(stack_t **stack, unsigned int line_number);
 void add_it(stack_t **stack, unsigned int line_number);
 void nop_do(stack_t **stack, unsigned int line_number);
-void ex_op(stack_t **stack, char *op, int value, unsigned int line_number);
 
 void mul_it(stack_t **head, unsigned int counter);
 void mod_it(stack_t **head, unsigned int counter);
@@ -50,6 +49,8 @@ void mod_it(stack_t **head, unsigned int counter);
 void rotl_it(stack_t **head,  __attribute__((unused)) unsigned int counter);
 void add_queue(stack_t **head, int n);
 void queue_it(stack_t **stack, unsigned int line_number);
+
+int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 
 #endif /* MONTY_H */
 
