@@ -33,7 +33,7 @@ void ex_op(stack_t **stack, char *op, int value, unsigned int line_number)
 		{"queue", queue_it},
 	};
 
-	size_t num_opcodes = sizeof(opcodes) / sizeof(opcodes[0]);
+	size_t num_ops sizeof(ops) / sizeof(ops[0]);
 
 	for (size_t i = 0; i < num_ops; ++i)
 	{
