@@ -11,7 +11,7 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 {
 	instruction_t opst[] = {
 				{"push", push_it}, {"pall", pall_it}, {"pint", pint_it},
-				{"pop", custom_pop},
+				{"pop", pop_it},
 				{"swap", swap_it},
 				{"add", add_it},
 				{"nop", nop_do},
