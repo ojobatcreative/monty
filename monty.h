@@ -49,6 +49,7 @@ void mod_it(stack_t **head, unsigned int counter);
 
 void rotl_it(stack_t **head,  __attribute__((unused)) unsigned int counter);
 void add_queue(stack_t **head, int n);
+void queue_it(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
 

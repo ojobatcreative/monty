@@ -18,7 +18,7 @@ void ex_op(stack_t **stack, char *op, int value, unsigned int line_number)
 
 	OpMapping;
 
-	OpMapping op[] =
+	OpMapping operations[] =
 	{
 		{"push", push_it},
 		{"pall", pall_it},
@@ -33,7 +33,7 @@ void ex_op(stack_t **stack, char *op, int value, unsigned int line_number)
 		{"queue", queue_it},
 	};
 
-	size_t num_ops sizeof(ops) / sizeof(ops[0]);
+	size_t num_ops sizeof(operations) / sizeof(operations[0]);
 
 	for (size_t i = 0; i < num_ops; ++i)
 	{
