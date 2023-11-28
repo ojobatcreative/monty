@@ -36,22 +36,14 @@ typedef struct instruction_s
 }
 instruction_t;
 
-void push_it(stack_t **stack, int value);
-void pall_it(stack_t **stack, unsigned int line_number);
-void pint_it(stack_t **stack, unsigned int line_number);
-void pop_it(stack_t **stack, unsigned int line_number);
-void swap_it(stack_t **stack, unsigned int line_number);
-void add_it(stack_t **stack, unsigned int line_number);
-void nop_do(stack_t **stack, unsigned int line_number);
+void push_it(stack_t **head, unsigned int counter);
+void pall_it(stack_t **head, unsigned int counter);
+void pint_it(stack_t **head, unsigned int counter);
+void pop_it(stack_t **head, unsigned int counter);
+void swap_it(stack_t **head, unsigned int counter);
 
-void mul_it(stack_t **head, unsigned int counter);
-void mod_it(stack_t **head, unsigned int counter);
-
-void rotl_it(stack_t **head,  __attribute__((unused)) unsigned int counter);
-void add_queue(stack_t **head, int n);
-void queue_it(stack_t **stack, unsigned int line_number);
-
-int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
+void add_it(stack_t **head, unsigned int counter);
+void nop_do(stack_t **head, unsigned int counter);
 
 #endif /* MONTY_H */
 

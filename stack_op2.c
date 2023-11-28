@@ -1,47 +1,75 @@
 #include "monty.h"
 
 /**
- * swap_it - Swaps the top two elements of the stack.
- * @stack: Double pointer to the head of the stack.
- * @line_number: Line number of the Monty bytecode file.
- */
-void swap_it(stack_t **stack, unsigned int line_number)
+ * pint_it - prints the top
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+*/
+void pint_it(stack_t **head, unsigned int counter)
 {
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (*head == NULL)
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
+	printf("%d\n", (*head)->n);
+}
 
-	int temp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = temp;
+
+/**
+ * pop_it - prints the top
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+*/
+void pop_it(stack_t **head, unsigned int counter)
+{
+	stack_t *th;
+
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	th = *head;
+	*head = th->next;
+	free(th);
 }
 
 /**
- * add_it - Adds the top two elements of the stack.
- * @stack: Double pointer to the head of the stack.
- * @line_number: Line number of the Monty bytecode file.
- */
-void add_it(stack_t **stack, unsigned int line_number)
+ * swap_it - adds the top two elements of the stack.
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+*/
+void swap_it(stack_t **head, unsigned int counter)
 {
-	if (*stack == NULL || (*stack)->next == NULL)
+	stack_t *th;
+	int len = 0, aux;
+
+	th = *head;
+	while (th)
 	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		th = th->next;
+		len++;
+	}
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-
-	(*stack)->next->n += (*stack)->n;
-	pop(stack, line_number);
-}
-
-/**
- * nop_do - Doesn't do anything.
- * @stack: Double pointer to the head of the stack.
- * @line_number: Line number of the Monty bytecode file.
- */
-void nop_do(stack_t **stack, unsigned int line_number)
-{
-	(void)stack;
-	(void)line_number;
+	th = *head;
+	aux = th->n;
+	th->n = th->next->n;
+	th->next->n = aux;
 }
