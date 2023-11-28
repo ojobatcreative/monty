@@ -5,7 +5,7 @@
  * @stack: Double pointer to the head of the stack.
  * @value: Integer value to be pushed onto the stack.
  */
-void push_it(stack_t **stack, int value)
+void push_it(stack_t **stack, int value, unsigned int line_number)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 	if (!new_node)
@@ -29,7 +29,7 @@ void push_it(stack_t **stack, int value)
  * @stack: Double pointer to the head of the stack.
  * @line_number: Line number of the Monty bytecode file.
  */
-void pall_it(stack_t **stack, unsigned int line_number)
+void pall_it(stack_t **stack, int value, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
@@ -47,7 +47,7 @@ void pall_it(stack_t **stack, unsigned int line_number)
  * @stack: Double pointer to the head of the stack.
  * @line_number: Line number of the Monty bytecode file.
  */
-void pint_it(stack_t **stack, unsigned int line_number)
+void pint_it(stack_t **stack, int value, unsigned int line_number)
 {
 	if (*stack == NULL)
 	{
